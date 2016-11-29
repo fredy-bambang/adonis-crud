@@ -1,0 +1,52 @@
+{% extends 'layouts.layout' %}
+
+{% block content %}
+
+    <div class="col-md-6">
+        {{ form.open({action: 'CustomerController.store'}) }}
+
+            {{ csrfField }}
+
+            <div class="form-group">
+                {{ form.label('username', 'Choose a username') }}
+                {{ form.text('username', null, {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.label('email', 'Enter email address') }}
+                {{ form.text('email', null, {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.label('password', 'Choose a strong password') }}
+                {{ form.password('password', null, {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.label('countries', 'Countries') }}
+                {{ form.select('countries', ['India', 'US', 'UK'], null, 'Select Country', {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.label('terms', 'Terms') }}
+                <div class="check-box">
+                    {{ form.checkbox('terms', 'agree') }} Agree
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.label('gender', 'Gender') }}
+                <div class="radio-group">
+                    {{ form.radio('gender', 'male', true) }} Male
+                    {{ form.radio('gender', 'female') }} Female
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.submit('Register', 'register', {class: 'btn btn-primary'}) }}
+            </div>
+
+        {{ form.close() }}
+    </div>
+
+{% endblock %}

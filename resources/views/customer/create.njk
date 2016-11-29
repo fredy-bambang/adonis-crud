@@ -1,0 +1,45 @@
+{% extends 'layouts.layout' %}
+
+{% block content %}
+
+    {% if old('errors') %}
+        <div class="alert alert-danger">
+            {% for error in old('errors') %}
+            <li> {{ error.message }} </li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="col-md-6">
+        {{ form.open({action: 'CustomerController.store'}) }}
+
+            {{ csrfField }}
+
+            <div class="form-group">
+                {{ form.label('name', 'Name') }}
+                {{ form.text('name', null, {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.label('address', 'Address') }}
+                {{ form.text('address', null, {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.label('email', 'Email') }}
+                {{ form.text('email', null, {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.label('phone', 'Phone') }}
+                {{ form.text('phone', null, {class: 'form-control'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.submit('Register', 'register', {class: 'btn btn-primary'}) }}
+            </div>
+
+        {{ form.close() }}
+    </div>
+
+{% endblock %}

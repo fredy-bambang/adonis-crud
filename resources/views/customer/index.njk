@@ -1,0 +1,46 @@
+
+{% extends 'master' %}
+
+{% block content %}
+
+
+  <div class="container">
+    {{ url }}
+    {{ baseUrl }}
+    <div id="page-selection">Pagination goes here</div>
+    <ul class="list-group col-md-6">
+      {% for customer in customers.data %}
+        <li class="list-group-item">
+            {{ customer.name }}<br>
+            {{ customer.address }}<br>
+            {{ customer.email }}<br>
+            {{ customer.phone }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
+{% block extScripts %}
+<script>
+    $('#page-selection').bootpag({
+        total: Math.ceil({{ customers.total / customers.perPage }}),
+        page: {{ customers.currentPage }},
+        maxVisible: 5,
+        leaps: true,
+        firstLastUse: true,
+        first: '←',
+        last: '→',
+        wrapClass: 'pagination',
+        activeClass: 'active',
+        disabledClass: 'disabled',
+        nextClass: 'next',
+        prevClass: 'prev',
+        lastClass: 'last',
+        firstClass: 'first'
+    }).on("page", function(event, num){
+        //$(".content4").html("Page " + num); // or some ajax content loading...
+        window.location.href = '{{ baseUrl + url }}?page=' + num + '';
+    }); 
+</script>
+{% endblock %}
